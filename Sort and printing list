@@ -1,0 +1,78 @@
+
+BinarySearchTree* bst;
+	bst = new BinarySearchTree;
+
+	Course course;
+
+	int choice = 0;
+	while (choice != 9) {
+		cout << "Menu:" << endl;
+		cout << "  1. Load Courses" << endl;
+		cout << "  2. Print Course List" << endl;
+		cout << "  3. Print Course" << endl;
+		cout << "  9. Exit" << endl;
+		cout << "Enter choice: ";
+		cin >> choice;
+
+		switch (choice) {
+
+		case 1:
+			
+			bst = new BinarySearchTree;
+
+			// Initialize a timer variable before loading bids
+			ticks = clock();
+
+			// Complete the method call to load the bids
+			if (loadCourses(filePath, bst) == -1) {
+				// if fails, reassign bst to blank tree.
+				bst = new BinarySearchTree;
+			}
+			else {
+				// Calculate elapsed time and display result
+				ticks = clock() - ticks; // current clock ticks minus starting clock ticks
+				cout << "time: " << ticks << " clock ticks" << endl;
+				cout << "time: " << ticks * 1.0 / CLOCKS_PER_SEC << " seconds" << endl;
+				// print number of bids loaded
+				cout << bst->coursesLoaded << " Courses loaded." << endl;
+			}
+
+			break;
+
+		case 2:
+			bst->InOrder();
+			break;
+
+		case 3:
+			cout << "Please enter Course Number:";
+			cin >> courseNumber;
+
+			ticks = clock();
+			course = bst->Search(courseNumber);
+
+			ticks = clock() - ticks;
+
+
+			//print course info 
+			if (!course.courseNumber.empty()) {
+				displayCourse(course);
+			}
+			else {
+				cout << "Course " << courseNumber << " not found!" << endl;
+			}
+
+			cout << "time: " << ticks << " clock ticks" << endl;
+			cout << "time: " << ticks * 1.0 / CLOCKS_PER_SEC << " seconds" << endl;
+
+			break;
+
+		case 9:
+
+			cout << "Good bye." << endl;
+
+			return 0;
+
+			break;
+		}
+	}
+}
